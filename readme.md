@@ -30,7 +30,7 @@ When `GET`ED, returns a given account address along with public and private key.
 }
 ```
 
-Note that public and private keys conform to Loom specifications (`Uint8Array`s of lengths 32 and 64 respectively).
+Note that public and private keys conform to Loom specifications (string representations of `Uint8Array`s of lengths 32 and 64 respectively).
 
 Requires `X-Api-Key` as header for authentication.
 
