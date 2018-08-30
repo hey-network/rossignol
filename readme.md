@@ -5,7 +5,7 @@
 
 ## DynamoDB setup
 
-You need to have a DynamoDB table setup for the target environment, typically `rossignol_staging` and `rossignol_production`. The table must have 1 primary partition key named `address` under the `string` type, and no sort key.
+You need to have a DynamoDB table setup for the target environment, typically `rossignol_staging` and `rossignol_production`. The table must have 1 primary partition key named `address` under the `string` type, and no sort key. Make sure that the table is encrypted at rest (you need to overwrite default table creation options for this)!
 
 ## Lambdas deployment
 
@@ -57,6 +57,7 @@ Use a user that belongs to the `lambdas-staging-group` group, and copy its crede
 [hey]
 aws_access_key_id = ACCESS_KEY_ID_HERE
 aws_secret_access_key = SECRET_ACCESS_KEY_HERE
+region = eu-central-1
 ```
 
 Note that it must be named `hey`, as this is the profile used for deployment in the `package.json` script.
@@ -69,36 +70,22 @@ Simply run `npm run staging` or `npm run production` to deploy on target environ
 
 The API Gateway can be configured directly from the Lambda console, selecting the "Open with access key" security option. Note that the authentication happens with the following header parameter: `X-Api-Key: API_KEY_HERE`.
 
-### Good to know
+### Testing from your machine
 
-#### Curl testing
-
-##### Setter
+#### Setter
 
 ```
 curl -X POST \
   -H 'x-api-key:API_KEY' \
   -H 'Content-Type: application/json' \
-  -i "https://URL_ENDPOINT"
+  -i "https://28gksj7fhl.execute-api.eu-central-1.amazonaws.com/staging/RossignolSetterStaging"
 ```
 
-##### Getter
+#### Getter
 
 ```
 curl -X GET \
   -H 'x-api-key:API_KEY' \
   -H 'Content-Type: application/json' \
-  -i "https://URL_ENDPOINT?address=ADDRESS"
-```
-
-#### Console testing
-
-You can test the Setter lambda from the Lambda console without any specific input.
-
-To test the Getter lambda, you can use the following test event (after an address has been created with the Setter):
-
-```
-  {
-    "body": "TODO"
-  }
+  -i "https://gu2e48i3kl.execute-api.eu-central-1.amazonaws.com/staging/RossignolGetterStaging?address=0x18219e7696130cb661d941e7c6d3d68a60fd015f"
 ```

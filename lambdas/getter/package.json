@@ -13,5 +13,5 @@
     "poststaging": "npm run removeLambdaZip && npm run updateLambaEnvStaging"
   },
   "author": "",
-  "license": "ISC",
+  "license": "ISC"
 }
