@@ -120,3 +120,13 @@ curl -X GET \
   -H 'Content-Type: application/json' \
   -i "https://gu2e48i3kl.execute-api.eu-central-1.amazonaws.com/staging/RossignolGetterStaging?address=0x18219e7696130cb661d941e7c6d3d68a60fd015f"
 ```
+
+## Other
+
+Note that this service does NOT push the account creation event to the Loom chain - it works in silo with no connection to any other service. Contrarily to Ethereum, Loom requires each account to be "added" to the chain before it is made usable for transactions. This generally happens with a command in the form of
+
+```
+loomProvider.addAccounts([accountPrivateKey])
+```
+
+Therefore, you'll need to make sure that if the client consuming Rossignol services tries to perform a chain transaction on behalf of a given account, it first checks for the actual recording of that account on the chain.
