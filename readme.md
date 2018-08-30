@@ -2,6 +2,37 @@
 
 ## Interface
 
+### Setter
+
+When `POST`ED, creates a new account along with public and private key. No body params needed. Returns the following:
+
+```
+{
+  "data": {
+    "address": "0x09911012db565b0d3b96c6db8f32190b7fb3b9bb"
+  }
+}
+```
+
+Requires `X-Api-Key` as header for authentication.
+
+### Getter
+
+When `GET`ED, returns a given account address along with public and private key. URL param needed is `address`. Returns the following:
+
+```
+{
+  "data": {
+    "address": "0x09911012db565b0d3b96c6db8f32190b7fb3b9bb"
+    "public_key": [93,13,158,150,160,187,130,1,84,230,29,44,191,69,161,40,82,45,82,161,27,191,76,127,166,31,203,197,94,139,4,172],
+    "private_key": [98,137,158,75,171,157,85,76,154,239,108,83,104,236,70,114,89,95,156,97,253,5,220,67,159,242,168,221,84,63,37,27,93,13,158,150,160,187,130,1,84,230,29,44,191,69,161,40,82,45,82,161,27,191,76,127,166,31,203,197,94,139,4,172],
+  }
+}
+```
+
+Note that public and private keys conform to Loom specifications (`Uint8Array`s of lengths 32 and 64 respectively).
+
+Requires `X-Api-Key` as header for authentication.
 
 ## DynamoDB setup
 
@@ -70,9 +101,9 @@ Simply run `npm run staging` or `npm run production` to deploy on target environ
 
 The API Gateway can be configured directly from the Lambda console, selecting the "Open with access key" security option. Note that the authentication happens with the following header parameter: `X-Api-Key: API_KEY_HERE`.
 
-### Testing from your machine
+## Manual testing
 
-#### Setter
+### Setter
 
 ```
 curl -X POST \
@@ -81,7 +112,7 @@ curl -X POST \
   -i "https://28gksj7fhl.execute-api.eu-central-1.amazonaws.com/staging/RossignolSetterStaging"
 ```
 
-#### Getter
+### Getter
 
 ```
 curl -X GET \
