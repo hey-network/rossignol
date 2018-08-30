@@ -1,0 +1,16 @@
+{
+  "name": "getter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "zipLambdaCode": "zip -r lambda.zip ./*",
+    "updateLambdaCode": "aws lambda update-function-code --function-name RossignolGetter --zip-file fileb://lambda.zip --profile hey-dev",
+    "removeLambdaZip":  "rm lambda.zip",
+    "prestaging": "npm run zipLambdaCode",
+    "staging": "npm run updateLambdaCode",
+    "poststaging": "npm run removeLambdaZip"
+  },
+  "author": "",
+  "license": "ISC",
+}
