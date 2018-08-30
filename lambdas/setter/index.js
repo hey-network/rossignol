@@ -3,7 +3,7 @@ const {
   LocalAddress
 } = require('loom-js')
 const AWS = require('aws-sdk')
-const TABLE_NAME = 'rossignol_accounts'
+const TABLE_NAME = process.env.DYNAMO_DB_TABLE_NAME
 
 //
 // ██╗  ██╗███████╗██╗     ██████╗ ███████╗██████╗ ███████╗

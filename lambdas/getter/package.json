@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "zipLambdaCode": "zip -r lambda.zip ./*",
-    "updateLambdaCode": "aws lambda update-function-code --function-name RossignolGetter --zip-file fileb://lambda.zip --profile hey-dev",
+    "updateLambdaCodeStaging": "aws lambda update-function-code --function-name RossignolGetterStaging --zip-file fileb://lambda.zip --profile hey",
+    "updateLambaEnvStaging": "aws lambda update-function-configuration --function-name RossignolGetterStaging --profile hey --environment file://environments/staging.json",
     "removeLambdaZip":  "rm lambda.zip",
     "prestaging": "npm run zipLambdaCode",
-    "staging": "npm run updateLambdaCode",
-    "poststaging": "npm run removeLambdaZip"
+    "staging": "npm run updateLambdaCodeStaging",
+    "poststaging": "npm run removeLambdaZip && npm run updateLambaEnvStaging"
   },
   "author": "",
   "license": "ISC",
