@@ -22,6 +22,8 @@ When `GET`ED, returns a given account address along with public and private key.
 
 ```
 {
+  "success": true,
+  "message": "Address account data successfully retrieved from Rossignol DB"
   "data": {
     "address": "0x09911012db565b0d3b96c6db8f32190b7fb3b9bb"
     "public_key": [93,13,158,150,160,187,130,1,84,230,29,44,191,69,161,40,82,45,82,161,27,191,76,127,166,31,203,197,94,139,4,172],

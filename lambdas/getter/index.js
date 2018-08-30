@@ -26,16 +26,30 @@ const getAccount = async (address) => {
 }
 
 const buildResponse = (account) => {
-  const headers = {
-    'Content-Type': 'application/json'
+  let statusCode
+  let body
+
+  if (account === undefined) {
+    statusCode = 404
+    body = {
+      success: false,
+      message: 'Address not registered in Rossignol DB'
+    }
+  } else {
+    statusCode = 200
+    body = {
+      success: true,
+      message: 'Address account data successfully retrieved from Rossignol DB',
+      data: account
+    }
   }
 
   return {
-    statusCode: 200,
-    headers: headers,
-    body: JSON.stringify({
-      data: account
-    })
+    statusCode: statusCode,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
   }
 }
 
