@@ -46,6 +46,8 @@ const buildResponse = (account) => {
     statusCode: 200,
     headers: headers,
     body: JSON.stringify({
+      success: true,
+      message: 'Account successfully created and recorded'
       data: {
         address: account.address
       }
