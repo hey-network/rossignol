@@ -1,6 +1,10 @@
 const {
-  CryptoUtils,
-  LocalAddress
+  CryptoUtils: {
+    generatePrivateKey, publicKeyFromPrivateKey, Uint8ArrayToB64
+  },
+  LocalAddress: {
+    fromPublicKey
+  }
 } = require('loom-js')
 const AWS = require('aws-sdk')
 const TABLE_NAME = process.env.DYNAMO_DB_TABLE_NAME
@@ -14,13 +18,13 @@ const TABLE_NAME = process.env.DYNAMO_DB_TABLE_NAME
 // ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝
 //
 const createAccount = () => {
-  const privateKey = CryptoUtils.generatePrivateKey()
-  const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
-  const address = LocalAddress.fromPublicKey(publicKey).toString()
+  const privateKey = generatePrivateKey()
+  const publicKey = publicKeyFromPrivateKey(privateKey)
+  const address = fromPublicKey(publicKey).toString()
 
   return {
-    private_key: Array.from(privateKey),
-    public_key: Array.from(publicKey),
+    private_key: Uint8ArrayToB64(privateKey),
+    public_key: Uint8ArrayToB64(publicKey),
     address: address
   }
 }
@@ -47,7 +51,7 @@ const buildResponse = (account) => {
     headers: headers,
     body: JSON.stringify({
       success: true,
-      message: 'Account successfully created and recorded'
+      message: 'Account successfully created and recorded',
       data: {
         address: account.address
       }

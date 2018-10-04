@@ -7,7 +7,7 @@
     "zipLambdaCode": "zip -r lambda.zip ./*",
     "updateLambdaCodeStaging": "aws lambda update-function-code --function-name RossignolSetterStaging --zip-file fileb://lambda.zip --profile hey",
     "updateLambaEnvStaging": "aws lambda update-function-configuration --function-name RossignolSetterStaging --profile hey --environment file://environments/staging.json",
-    "removeLambdaZip":  "rm lambda.zip",
+    "removeLambdaZip": "rm lambda.zip",
     "prestaging": "npm run zipLambdaCode",
     "staging": "npm run updateLambdaCodeStaging",
     "poststaging": "npm run removeLambdaZip && npm run updateLambaEnvStaging"
@@ -15,6 +15,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "loom-js": "^1.18.0"
+    "loom-js": "^1.25.0"
   }
 }
