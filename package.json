@@ -1,0 +1,28 @@
+{
+  "name": "setter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --fix",
+    "zip": "zip -r lambda.zip ./index.js ./logger.js ./accounts.js ./node_modules",
+    "clean": "rm lambda.zip",
+    "code:staging:setter": "aws lambda update-function-code --function-name RossignolSetterStaging --zip-file fileb://lambda.zip --profile hey",
+    "code:staging:getter": "aws lambda update-function-code --function-name RossignolGetterStaging --zip-file fileb://lambda.zip --profile hey",
+    "env:staging:setter": "aws lambda update-function-configuration --function-name RossignolSetterStaging --profile hey --environment file://environments/staging.json",
+    "env:staging:getter": "aws lambda update-function-configuration --function-name RossignolGetterStaging --profile hey --environment file://environments/staging.json",
+    "deploy:staging:setter": "npm run zip && npm run code:staging:setter && npm run env:staging:setter && npm run clean",
+    "deploy:staging:getter": "npm run zip && npm run code:staging:getter && npm run env:staging:getter && npm run clean"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "dependencies": {
+    "loom-js": "^1.36.0",
+    "winston": "^3.1.0"
+  }
+}
