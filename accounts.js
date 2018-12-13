@@ -4,7 +4,6 @@ const dynamoDBClient = new aws.DynamoDB.DocumentClient();
 const table = process.env.DYNAMO_DB_TABLE_NAME;
 
 const { getLogger } = require('./logger');
-
 const logger = getLogger('ROSSIGNOL');
 
 const {
