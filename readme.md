@@ -1,7 +1,7 @@
 # Rossignol
 
 ## Overview
-While we wait for a super ergonomic wallet, we perform sidechain accounts management on behalf of Hey users. This is an very sensitive service as it contains all user accounts data. Please read carefully.
+Pending the introduction of a fully user-friendly sidechain wallet on the market, Hey performs sidechain accounts management on behalf of its users. This is a sensitive service as it manages Hey user sidechain accounts data.
 
 Note that in the future we plan to improve security of the underlying DB (a DynamoDB). For now it is already encrypted at rest - next we could consider sharding across multiple service providers.
 
